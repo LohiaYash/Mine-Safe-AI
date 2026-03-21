@@ -1,0 +1,51 @@
+2025-09-14 01:16:21,802 - __main__ - INFO - Configuration loaded for mode: demo
+2025-09-14 01:18:03,253 - __main__ - INFO - Configuration loaded for mode: train
+2025-09-14 01:21:58,943 - __main__ - INFO - Configuration loaded for mode: train
+2025-09-14 01:21:58,953 - data_loader - INFO - Data loaded successfully: (3000, 17)
+2025-09-14 01:21:58,955 - __main__ - ERROR - Training failed: Cannot convert [['Low' 'Low' 'Medium' ... 'Low' 'Medium' 'Medium']] to numeric
+2025-09-14 01:23:27,087 - __main__ - INFO - Configuration loaded for mode: predict
+2025-09-14 01:23:27,088 - __main__ - ERROR - Prediction failed: [Errno 2] No such file or directory: 'models/trained_models/rockfall_predictor.pkl'
+2025-09-14 01:30:19,213 - __main__ - INFO - Configuration loaded for mode: demo
+2025-09-14 01:30:37,719 - __main__ - INFO - Configuration loaded for mode: predict
+2025-09-14 01:30:37,719 - __main__ - ERROR - Prediction failed: [Errno 2] No such file or directory: 'models/trained_models/rockfall_predictor.pkl'
+2025-09-14 01:32:37,519 - __main__ - INFO - Configuration loaded for mode: train
+2025-09-14 01:32:37,533 - predictor - INFO - Starting model training...
+2025-09-14 01:32:37,821 - predictor - INFO - Model training completed. Training accuracy: 1.0000
+2025-09-14 01:32:37,838 - predictor - INFO - Model evaluation completed. Test accuracy: 0.9533, AUC: 0.9925
+2025-09-14 01:32:37,854 - predictor - INFO - Model saved to models/trained_models
+2025-09-14 01:32:37,858 - __main__ - INFO - Training completed successfully
+2025-09-14 01:34:33,239 - __main__ - INFO - Configuration loaded for mode: predict
+2025-09-14 01:34:33,254 - predictor - INFO - Model loaded from models/trained_models
+2025-09-14 01:34:51,195 - predictor - WARNING - Feature bench_height_m not found in input, using default value
+2025-09-14 01:34:51,196 - predictor - WARNING - Feature joint_friction_angle_deg not found in input, using default value
+2025-09-14 01:34:51,197 - predictor - WARNING - Feature joint_cohesion_kpa not found in input, using default value
+2025-09-14 01:34:51,197 - predictor - WARNING - Feature earthquake_magnitude not found in input, using default value
+2025-09-14 01:34:51,197 - predictor - WARNING - Feature seismic_zone not found in input, using default value
+2025-09-14 01:34:51,197 - predictor - WARNING - Feature earthquake_distance_km not found in input, using default value
+2025-09-14 01:34:51,198 - predictor - WARNING - Feature clay_content_pct not found in input, using default value
+2025-09-14 01:34:51,198 - predictor - WARNING - Feature moisture_content_pct not found in input, using default value
+2025-09-14 01:34:51,198 - predictor - WARNING - Feature bearing_capacity_kpa not found in input, using default value
+2025-09-14 01:34:51,199 - predictor - WARNING - Feature blast_charge_weight_kg not found in input, using default value
+2025-09-14 01:34:51,199 - predictor - WARNING - Feature environmental_humidity_pct not found in input, using default value
+2025-09-14 01:34:51,217 - __main__ - INFO - Predictions completed successfully
+2025-09-14 01:47:26,257 - __main__ - INFO - Configuration loaded for mode: train
+2025-09-14 01:47:26,277 - predictor - INFO - Starting model training...
+2025-09-14 01:47:26,566 - predictor - INFO - Model training completed. Training accuracy: 1.0000
+2025-09-14 01:47:26,582 - predictor - INFO - Model evaluation completed. Test accuracy: 0.9533, AUC: 0.9925
+2025-09-14 01:47:26,600 - predictor - INFO - Model saved to models/trained_models
+2025-09-14 01:47:26,605 - __main__ - INFO - Training completed successfully
+2025-09-15 14:43:20,870 - __main__ - INFO - Configuration loaded for mode: train
+2025-09-15 14:43:20,892 - predictor - INFO - Starting model training...
+2025-09-15 14:43:21,362 - predictor - INFO - Model training completed. Training accuracy: 1.0000
+2025-09-15 14:43:21,388 - predictor - INFO - Model evaluation completed. Test accuracy: 0.9533, AUC: 0.9925
+2025-09-15 14:43:21,415 - predictor - INFO - Model saved to models/trained_models
+2025-09-15 14:43:21,421 - __main__ - INFO - Training completed successfully
+2026-03-16 00:41:54,422 - __main__ - INFO - Configuration loaded for mode: demo
+2026-03-16 10:11:26,188 - __main__ - INFO - Configuration loaded for mode: demo
+2026-03-16 10:13:14,516 - __main__ - INFO - Configuration loaded for mode: train
+2026-03-16 10:13:14,530 - predictor - INFO - Starting model training...
+2026-03-16 10:13:14,796 - predictor - INFO - Model training completed. Training accuracy: 1.0000
+2026-03-16 10:13:14,813 - predictor - INFO - Model evaluation completed. Test accuracy: 0.9533, AUC: 0.9925
+2026-03-16 10:13:14,830 - predictor - INFO - Model saved to models/trained_models
+2026-03-16 10:13:14,836 - __main__ - INFO - Training completed successfully
+2026-03-16 10:28:40,829 - __main__ - INFO - Configuration loaded for mode: demo
