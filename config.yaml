@@ -1,0 +1,108 @@
+# Rockfall Prediction System Configuration
+project:
+  name: "Rockfall Prediction for Indian Open Pit Mines"
+  version: "1.0.0"
+  description: "ML system for predicting rockfall hazards in mining operations"
+
+data:
+  raw_data_path: "data/raw/"
+  processed_data_path: "data/processed/"
+  dataset_file: "indian_rockfall_prediction_dataset.csv"
+  test_size: 0.2
+  random_state: 42
+
+  # Feature columns for model training
+  features:
+    geological:
+      - "rock_mass_rating"
+      - "geological_strength_index"
+      - "ucs_mpa"
+      - "weathering_grade"
+      - "joint_spacing_m"
+      - "friction_angle_deg"
+      - "cohesion_kpa"
+
+    geometric:
+      - "slope_height_m"
+      - "slope_angle_deg"
+      - "bench_height_m"
+      - "overall_slope_angle_deg"
+
+    environmental:
+      - "rainfall_mm_annual"
+      - "pore_pressure_kpa"
+      - "monsoon_intensity"
+
+    operational:
+      - "blast_distance_m"
+      - "vibration_intensity_mm_s"
+      - "block_volume_m3"
+
+model:
+  algorithm: "random_forest"  # Options: random_forest, gradient_boosting, xgboost
+  hyperparameters:
+    random_forest:
+      n_estimators: 100
+      max_depth: 15
+      min_samples_split: 5
+      min_samples_leaf: 2
+      random_state: 42
+      class_weight: "balanced"
+
+    gradient_boosting:
+      n_estimators: 100
+      learning_rate: 0.1
+      max_depth: 6
+      random_state: 42
+
+  # Model persistence
+  save_path: "models/trained_models/"
+  model_file: "rockfall_predictor.pkl"
+  scaler_file: "feature_scaler.pkl"
+
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "roc_auc"
+
+  cross_validation:
+    cv_folds: 5
+    stratify: true
+
+mining_regions:
+  # Indian mining regions with specific characteristics
+  jharkhand:
+    name: "Jharkhand Coal Mines"
+    avg_rainfall: 1400
+    typical_rock_type: "sandstone_shale"
+    common_issues: ["high_weathering", "monsoon_impact"]
+
+  odisha:
+    name: "Odisha Iron Ore Mines" 
+    avg_rainfall: 1600
+    typical_rock_type: "iron_ore"
+    common_issues: ["structural_control", "water_ingress"]
+
+  rajasthan:
+    name: "Rajasthan Limestone Mines"
+    avg_rainfall: 600
+    typical_rock_type: "limestone"
+    common_issues: ["low_cohesion", "blast_damage"]
+
+visualization:
+  dashboard:
+    port: 8501
+    theme: "streamlit"
+
+  charts:
+    style: "seaborn"
+    figsize: [12, 8]
+    dpi: 300
+
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/rockfall_prediction.log"
