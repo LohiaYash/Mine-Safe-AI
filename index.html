@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MineSafe AI — Rockfall Hazard Prediction for Indian Open Pit Mines</title>
+  <meta name="description" content="AI-powered rockfall risk prediction system for Indian open pit mines. Real-time hazard assessment using machine learning with 94% accuracy." />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/static/css/style.css" />
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <a href="#" class="nav-brand">
+      <span class="nav-brand-icon">⛏️</span>
+      MineSafe AI
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#predictor">Predictor</a></li>
+      <li><a href="#dashboard">Dashboard</a></li>
+      <li><a href="#detection">Detection</a></li>
+      <li><a href="#regions">Regions</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ======================== HERO ======================== -->
+<section class="hero" id="hero">
+  <canvas class="hero-canvas" id="heroCanvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="pulse-dot"></span>
+      AI-Powered Mining Safety
+    </div>
+    <h1 class="hero-title">
+      Predict Rockfall<br/>
+      <span class="gradient-text">Before It Happens</span>
+    </h1>
+    <p class="hero-subtitle">
+      Advanced machine learning system for real-time rockfall hazard prediction in Indian open pit mines.
+      Protecting miners with data-driven safety intelligence.
+    </p>
+    <div class="hero-actions">
+      <a href="#predictor" class="btn btn-primary">⚡ Try Risk Predictor</a>
+      <a href="#dashboard" class="btn btn-outline">📊 View Dashboard</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value" id="heroAccuracy">94%</div>
+        <div class="hero-stat-label">Model Accuracy</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">20+</div>
+        <div class="hero-stat-label">Risk Parameters</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">3</div>
+        <div class="hero-stat-label">Mining Regions</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-value">YOLO</div>
+        <div class="hero-stat-label">Vision Detection</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FEATURES ======================== -->
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">🔬 Core Capabilities</div>
+      <h2 class="section-title">Comprehensive Hazard Intelligence</h2>
+      <p class="section-subtitle">Integrating geological, environmental, and operational data for accurate rockfall risk assessment.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon amber">📊</div>
+        <h3>Multi-Factor Risk Assessment</h3>
+        <p>Analyzes 20+ geological, environmental, and operational parameters simultaneously for holistic hazard evaluation.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon emerald">🇮🇳</div>
+        <h3>Indian Mining Context</h3>
+        <p>Purpose-built for Indian geological conditions, monsoon impacts, and DGMS regulatory requirements.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon blue">🤖</div>
+        <h3>Multiple ML Algorithms</h3>
+        <p>Employs Random Forest, Gradient Boosting, and XGBoost ensemble methods for robust predictions.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon red">🎯</div>
+        <h3>YOLO Vision Detection</h3>
+        <p>Real-time rockfall event detection in video feeds using state-of-the-art YOLO object detection neural networks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PREDICTOR ======================== -->
+<section class="section" id="predictor" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">⚡ Interactive Tool</div>
+      <h2 class="section-title">Real-Time Risk Predictor</h2>
+      <p class="section-subtitle">Adjust the mine parameters below and get an instant AI-powered rockfall risk assessment.</p>
+    </div>
+
+    <div class="predictor-layout">
+      <!-- Form -->
+      <form class="predictor-form reveal" id="predictorForm">
+
+        <div class="form-group-title">🪨 Geological Parameters</div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Rock Mass Rating (RMR)</span><span class="slider-value" id="rock_mass_rating_val">50</span></div>
+          <input type="range" class="param-slider" id="rock_mass_rating" name="rock_mass_rating" min="0" max="100" value="50" step="1" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Geological Strength Index</span><span class="slider-value" id="geological_strength_index_val">45</span></div>
+          <input type="range" class="param-slider" id="geological_strength_index" name="geological_strength_index" min="0" max="100" value="45" step="1" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Weathering Grade</span><span class="slider-value" id="weathering_grade_val">3</span></div>
+          <input type="range" class="param-slider" id="weathering_grade" name="weathering_grade" min="1" max="5" value="3" step="1" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Friction Angle (°)</span><span class="slider-value" id="friction_angle_deg_val">32</span></div>
+          <input type="range" class="param-slider" id="friction_angle_deg" name="friction_angle_deg" min="15" max="50" value="32" step="1" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Cohesion (kPa)</span><span class="slider-value" id="cohesion_kpa_val">25</span></div>
+          <input type="range" class="param-slider" id="cohesion_kpa" name="cohesion_kpa" min="5" max="100" value="25" step="1" />
+        </div>
+
+        <div class="form-group-title">📐 Slope Geometry</div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Slope Height (m)</span><span class="slider-value" id="slope_height_m_val">80</span></div>
+          <input type="range" class="param-slider" id="slope_height_m" name="slope_height_m" min="10" max="200" value="80" step="5" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Slope Angle (°)</span><span class="slider-value" id="slope_angle_deg_val">45</span></div>
+          <input type="range" class="param-slider" id="slope_angle_deg" name="slope_angle_deg" min="30" max="80" value="45" step="1" />
+        </div>
+
+        <div class="form-group-title">🌧️ Environmental Factors</div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Annual Rainfall (mm)</span><span class="slider-value" id="rainfall_mm_annual_val">1200</span></div>
+          <input type="range" class="param-slider" id="rainfall_mm_annual" name="rainfall_mm_annual" min="200" max="3000" value="1200" step="50" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Pore Pressure (kPa)</span><span class="slider-value" id="pore_pressure_kpa_val">50</span></div>
+          <input type="range" class="param-slider" id="pore_pressure_kpa" name="pore_pressure_kpa" min="0" max="200" value="50" step="5" />
+        </div>
+
+        <div class="form-group-title">⚙️ Operational Factors</div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Vibration Intensity (mm/s)</span><span class="slider-value" id="vibration_intensity_mm_s_val">10</span></div>
+          <input type="range" class="param-slider" id="vibration_intensity_mm_s" name="vibration_intensity_mm_s" min="0" max="30" value="10" step="1" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Block Volume (m³)</span><span class="slider-value" id="block_volume_m3_val">2</span></div>
+          <input type="range" class="param-slider" id="block_volume_m3" name="block_volume_m3" min="0" max="20" value="2" step="0.5" />
+        </div>
+
+        <div class="slider-group">
+          <div class="slider-label"><span>Joint Spacing (m)</span><span class="slider-value" id="joint_spacing_m_val">0.5</span></div>
+          <input type="range" class="param-slider" id="joint_spacing_m" name="joint_spacing_m" min="0.1" max="3" value="0.5" step="0.1" />
+        </div>
+
+        <button type="submit" class="btn btn-primary predict-btn">⚡ Analyze Risk</button>
+      </form>
+
+      <!-- Results -->
+      <div class="predictor-results reveal">
+        <div class="result-card">
+          <!-- Placeholder (visible initially) -->
+          <div id="resultPlaceholder" class="result-placeholder">
+            <div class="placeholder-icon">🏔️</div>
+            <p>Adjust mine parameters and click<br/><strong>Analyze Risk</strong> to get your assessment</p>
+          </div>
+
+          <!-- Actual result (hidden initially) -->
+          <div id="resultContent" style="display:none;">
+            <!-- Gauge -->
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 200 200">
+                <circle class="gauge-bg" cx="100" cy="100" r="90" />
+                <circle class="gauge-fill" cx="100" cy="100" r="90"
+                  stroke-dasharray="565.48"
+                  stroke-dashoffset="565.48" />
+              </svg>
+              <div class="gauge-center">
+                <div class="gauge-value" id="gaugeValue">0</div>
+                <div class="gauge-label">Risk Score</div>
+              </div>
+            </div>
+
+            <div id="riskLevelBadge" class="result-risk-level risk-low">Low Risk</div>
+            <p id="confidenceText" class="result-confidence">Model confidence: —</p>
+
+            <div class="result-details">
+              <h4>📋 Safety Recommendations</h4>
+              <ul class="recommendation-list" id="recommendationList"></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== DASHBOARD ======================== -->
+<section class="section" id="dashboard">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">📊 Analytics</div>
+      <h2 class="section-title">Performance Dashboard</h2>
+      <p class="section-subtitle">Real-time model metrics, risk distributions, and regional analysis powered by live dataset.</p>
+    </div>
+
+    <!-- Metric Cards -->
+    <div class="metrics-row reveal">
+      <div class="metric-card">
+        <div class="metric-value" id="metricAccuracy">—</div>
+        <div class="metric-label">Accuracy</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="metricAUC">—</div>
+        <div class="metric-label">AUC Score</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="metricSamples">—</div>
+        <div class="metric-label">Data Samples</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-value" id="metricFeatures">—</div>
+        <div class="metric-label">Features</div>
+      </div>
+    </div>
+
+    <!-- Charts -->
+    <div class="dashboard-grid">
+      <div class="chart-card reveal">
+        <h3>🎯 Risk Distribution</h3>
+        <canvas id="riskDistChart"></canvas>
+      </div>
+      <div class="chart-card reveal">
+        <h3>📊 Feature Importance</h3>
+        <canvas id="featureChart"></canvas>
+      </div>
+      <div class="chart-card reveal">
+        <h3>🗺️ Regional Risk Profile</h3>
+        <canvas id="regionalChart"></canvas>
+      </div>
+      <div class="chart-card reveal">
+        <h3>📈 Model Performance Metrics</h3>
+        <canvas id="perfChart"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== YOLO DETECTION ======================== -->
+<section class="section" id="detection" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">🎥 Computer Vision</div>
+      <h2 class="section-title">YOLO Rockfall Detection</h2>
+      <p class="section-subtitle">Real-time rockfall event detection using YOLOv8 neural networks trained on mining footage.</p>
+    </div>
+
+    <div class="video-grid">
+      <!-- Input / Output pairs -->
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #1 — Input</h3>
+          <p>Raw surveillance footage from an open pit mine slope.</p>
+          <span class="video-tag input">Input Feed</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_out_1.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #1 — Detected</h3>
+          <p>YOLO model annotated output with bounding boxes on detected rockfall.</p>
+          <span class="video-tag output">AI Detected</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #2 — Input</h3>
+          <p>Slope monitoring camera capture during active mining operations.</p>
+          <span class="video-tag input">Input Feed</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_out_2.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #2 — Detected</h3>
+          <p>AI-annotated output showing detected rock movements and hazard zones.</p>
+          <span class="video-tag output">AI Detected</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_3.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #3 — Input</h3>
+          <p>High-angle camera footage capturing slope instability.</p>
+          <span class="video-tag input">Input Feed</span>
+        </div>
+      </div>
+
+      <div class="video-card reveal">
+        <div class="video-wrapper">
+          <video controls preload="metadata">
+            <source src="/videos/Rockfall_out_3.mp4" type="video/mp4" />
+          </video>
+        </div>
+        <div class="video-info">
+          <h3>Rockfall Event #3 — Detected</h3>
+          <p>YOLO v8 detection results with confidence scores overlaid.</p>
+          <span class="video-tag output">AI Detected</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== REGIONS ======================== -->
+<section class="section" id="regions">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">🗺️ Coverage</div>
+      <h2 class="section-title">Indian Mining Regions</h2>
+      <p class="section-subtitle">Purpose-built risk models for the three major open pit mining corridors across India.</p>
+    </div>
+
+    <div class="regions-grid">
+      <!-- Jharkhand -->
+      <div class="region-card reveal">
+        <div class="region-header">
+          <div class="region-icon" style="background:var(--red-glow);">🏭</div>
+          <div>
+            <h3>Jharkhand Coal Mines</h3>
+            <span class="region-type">Coal &amp; Mineral Belt</span>
+          </div>
+        </div>
+        <div class="region-stats">
+          <div class="region-stat">
+            <div class="stat-label">Avg. Rainfall</div>
+            <div class="stat-value text-amber">1400 mm</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Risk Profile</div>
+            <div class="stat-value text-red">High</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Rock Type</div>
+            <div class="stat-value">Sandstone</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Seismic Zone</div>
+            <div class="stat-value">III-IV</div>
+          </div>
+        </div>
+        <div class="region-issues">
+          <span class="issue-tag">High Weathering</span>
+          <span class="issue-tag">Monsoon Impact</span>
+          <span class="issue-tag">Active Seismicity</span>
+        </div>
+      </div>
+
+      <!-- Odisha -->
+      <div class="region-card reveal">
+        <div class="region-header">
+          <div class="region-icon" style="background:var(--amber-glow);">⛰️</div>
+          <div>
+            <h3>Odisha Iron Ore Mines</h3>
+            <span class="region-type">Iron Ore Belt</span>
+          </div>
+        </div>
+        <div class="region-stats">
+          <div class="region-stat">
+            <div class="stat-label">Avg. Rainfall</div>
+            <div class="stat-value text-amber">1600 mm</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Risk Profile</div>
+            <div class="stat-value" style="color:var(--amber);">Medium-High</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Rock Type</div>
+            <div class="stat-value">Iron Ore</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Seismic Zone</div>
+            <div class="stat-value">II-III</div>
+          </div>
+        </div>
+        <div class="region-issues">
+          <span class="issue-tag">Structural Control</span>
+          <span class="issue-tag">Water Ingress</span>
+          <span class="issue-tag">Deep Excavation</span>
+        </div>
+      </div>
+
+      <!-- Rajasthan -->
+      <div class="region-card reveal">
+        <div class="region-header">
+          <div class="region-icon" style="background:var(--emerald-glow);">🏗️</div>
+          <div>
+            <h3>Rajasthan Limestone Mines</h3>
+            <span class="region-type">Limestone &amp; Marble Belt</span>
+          </div>
+        </div>
+        <div class="region-stats">
+          <div class="region-stat">
+            <div class="stat-label">Avg. Rainfall</div>
+            <div class="stat-value text-amber">600 mm</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Risk Profile</div>
+            <div class="stat-value text-emerald">Low-Medium</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Rock Type</div>
+            <div class="stat-value">Limestone</div>
+          </div>
+          <div class="region-stat">
+            <div class="stat-label">Seismic Zone</div>
+            <div class="stat-value">II</div>
+          </div>
+        </div>
+        <div class="region-issues">
+          <span class="issue-tag">Low Cohesion</span>
+          <span class="issue-tag">Blast Damage</span>
+          <span class="issue-tag">Arid Conditions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== ABOUT ======================== -->
+<section class="section" id="about" style="background: var(--bg-secondary);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-badge">🧠 Technology</div>
+      <h2 class="section-title">Under the Hood</h2>
+      <p class="section-subtitle">A robust machine learning pipeline built for real-world mining safety applications.</p>
+    </div>
+
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <h3>How MineSafe AI Works</h3>
+        <p>
+          The system ingests geological, environmental, and operational data from mine sites,
+          processes it through a feature engineering pipeline, and feeds it into ensemble machine
+          learning models trained on real-world datasets. A composite risk score is generated
+          in real-time, alongside actionable safety recommendations.
+        </p>
+        <p>
+          In parallel, our YOLO-based computer vision module processes slope surveillance
+          video to detect rockfall events as they happen, enabling rapid alert and response.
+        </p>
+        <div class="tech-stack">
+          <span class="tech-badge">Python</span>
+          <span class="tech-badge">Scikit-learn</span>
+          <span class="tech-badge">YOLOv8</span>
+          <span class="tech-badge">Random Forest</span>
+          <span class="tech-badge">XGBoost</span>
+          <span class="tech-badge">Pandas</span>
+          <span class="tech-badge">NumPy</span>
+          <span class="tech-badge">Flask</span>
+          <span class="tech-badge">OpenCV</span>
+          <span class="tech-badge">Chart.js</span>
+        </div>
+      </div>
+
+      <div class="performance-grid">
+        <div class="perf-card">
+          <div class="perf-value">94%</div>
+          <div class="perf-label">Accuracy</div>
+        </div>
+        <div class="perf-card">
+          <div class="perf-value">0.97</div>
+          <div class="perf-label">AUC Score</div>
+        </div>
+        <div class="perf-card">
+          <div class="perf-value">93%</div>
+          <div class="perf-label">Precision</div>
+        </div>
+        <div class="perf-card">
+          <div class="perf-value">95%</div>
+          <div class="perf-label">Recall</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>⛏️ MineSafe AI</h3>
+        <p>Protecting miners with intelligent rockfall prediction. Built for Indian open pit mining operations.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#predictor">Risk Predictor</a></li>
+          <li><a href="#dashboard">Dashboard</a></li>
+          <li><a href="#detection">YOLO Detection</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Regions</h4>
+        <ul>
+          <li><a href="#regions">Jharkhand</a></li>
+          <li><a href="#regions">Odisha</a></li>
+          <li><a href="#regions">Rajasthan</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Technology</h4>
+        <ul>
+          <li><a href="#about">How It Works</a></li>
+          <li><a href="#about">ML Models</a></li>
+          <li><a href="#about">YOLO Vision</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 MineSafe AI — Rockfall Prediction System for Indian Open Pit Mines</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script src="/static/js/app.js"></script>
+</body>
+</html>
