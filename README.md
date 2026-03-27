@@ -4,6 +4,14 @@
 
 MineSafe-AI is an advanced, AI-powered rockfall hazard prediction system designed specifically for Indian open-pit mines. It integrates geological, environmental, and operational data to assess risk in real-time, protecting miners with actionable, data-driven safety intelligence.
 
+
+<img width="1376" height="730" alt="image" src="https://github.com/user-attachments/assets/f5aaa75e-c733-4d84-ae84-9a15a1aca13f" />
+
+<img width="1372" height="758" alt="image" src="https://github.com/user-attachments/assets/990b1dc5-61f3-49e3-9f9c-03ce730dfcb5" />
+
+<img width="1416" height="764" alt="image" src="https://github.com/user-attachments/assets/579fb391-ef4c-488a-b327-81329f13975a" />
+
+
 ## ✨ Key Features
 
 - **Real-Time Risk Predictor:** An interactive web tool that analyzes 14+ specific parameters (e.g., Slope Angle, Weathering Grade, Joint Friction) to instantly calculate a composite **Risk Score** and determine the overall **Hazard Level**.
