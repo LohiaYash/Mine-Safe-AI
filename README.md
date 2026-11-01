@@ -1,4 +1,4 @@
-# MineSafe-AI ⛏️
+# MineSafe-AI
 
 **Predict Rockfall Before It Happens.**
 
